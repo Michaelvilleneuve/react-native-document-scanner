@@ -1,5 +1,6 @@
 
 #import "RNPdfScanner.h"
+#import "DocumentScannerView.h"
 
 @implementation RNPdfScanner
 
@@ -8,6 +9,10 @@
     return dispatch_get_main_queue();
 }
 RCT_EXPORT_MODULE()
+
+- (UIView*) view {
+    return [[DocumentScannerView alloc] init];
+}
 
 @end
   
