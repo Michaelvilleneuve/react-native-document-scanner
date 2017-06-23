@@ -15,6 +15,7 @@ import PdfScanner from 'react-native-pdf-scanner';
 
 export default class Example extends Component {
   render() {
+    console.log(<PdfScanner />);
     return (
       <View style={styles.container}>
         <PdfScanner style={{ width: 100, height: 100, borderColor: 'blue', borderWidth: 1 }} />

@@ -5,7 +5,7 @@
 
 `$ npm install react-native-pdf-scanner --save`
 
-### Mostly automatic installation
+### Automatic installation
 
 `$ react-native link react-native-pdf-scanner`
 
@@ -21,8 +21,9 @@
 
 ## Usage
 ```javascript
-import RNPdfScanner from 'react-native-pdf-scanner';
+import PdfScanner from 'react-native-pdf-scanner';
 
-// TODO: What to do with the module?
-RNPdfScanner;
+...
+
+  return (<PdfScanner />);
 ```
