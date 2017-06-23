@@ -1,8 +1,8 @@
 
-#import "RNPdfScanner.h"
+#import "RNPdfScannerManager.h"
 #import "DocumentScannerView.h"
 
-@implementation RNPdfScanner
+@implementation RNPdfScannerManager
 
 - (dispatch_queue_t)methodQueue
 {
@@ -15,4 +15,3 @@ RCT_EXPORT_MODULE()
 }
 
 @end
-  
