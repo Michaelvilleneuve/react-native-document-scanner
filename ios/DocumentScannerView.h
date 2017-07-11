@@ -9,7 +9,7 @@
 #import "IPDFCameraViewController.h"
 #import <React/RCTViewManager.h>
 
-@interface DocumentScannerView : IPDFCameraViewController
+@interface DocumentScannerView : IPDFCameraViewController <IPDFCameraViewControllerDelegate>
 
 @property (nonatomic, copy) RCTBubblingEventBlock onPictureTaken;
 

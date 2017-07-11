@@ -14,17 +14,16 @@ import {
 import PdfScanner from 'react-native-pdf-scanner';
 
 export default class Example extends Component {
+  alert(params) {
+    alert('coucou');
+    console.log(params);
+  }
   render() {
-    console.log(<PdfScanner />);
     return (
       <View style={styles.container}>
-        <PdfScanner style={{ width: 100, height: 100, borderColor: 'blue', borderWidth: 1 }} />
+        <PdfScanner onPictureTaken={this.alert.bind(this)} style={{ flex: 1, width: 400, height: 400, borderColor: 'orange', borderWidth: 1 }} />
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          This is an example of react-native-pdf-scanner
         </Text>
       </View>
     );
