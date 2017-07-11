@@ -16,8 +16,6 @@
 
 @implementation DocumentScannerView
 
-RCT_EXPORT_VIEW_PROPERTY(onPictureTaken, RCTBubblingEventBlock)
-
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -42,7 +40,9 @@ RCT_EXPORT_VIEW_PROPERTY(onPictureTaken, RCTBubblingEventBlock)
     }
     if (self.stableCounter > 5){
         [self captureImageWithCompletionHander:^(id data) {
-            self.onPictureTaken(@{@"image": @"coucou"});
+           if (self.onPictureTaken) {
+               self.onPictureTaken(@{@"image": data});
+           }
         }];
     }
 }
