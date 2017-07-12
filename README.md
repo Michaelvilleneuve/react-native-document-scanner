@@ -1,7 +1,7 @@
 
 # React Native Document Scanner
 
-
+![alt text](https://raw.githubusercontent.com/Michaelvilleneuve/react-native-document-scanner/master/images/mockup.png)
 
 ## Getting started
 
@@ -58,4 +58,4 @@ class YourComponent extends Component {
 
 | Prop | Params | Type | Description |
 | :--- | :----: | :--: | :---------- |
-| onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string'}`
+| onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string'}` |
