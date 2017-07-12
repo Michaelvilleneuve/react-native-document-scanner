@@ -33,7 +33,7 @@ export default class Example extends Component {
             onPictureTaken={data => this.setState({ image: data.image })}
             overlayColor="rgba(255,130,0, 0.7)"
             enableTorch={this.state.flashEnabled}
-            brightness={0.3}
+            brightness={0}
             saturation={1}
             contrast={1.1}
             style={styles.scanner}

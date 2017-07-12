@@ -16,7 +16,7 @@ class PdfScanner extends React.Component {
         brightness={this.props.brightness||0}
         saturation={this.props.saturation||1}
         contrast={this.props.contrast||1}
-      />;
+      />
     );
   }
 }
