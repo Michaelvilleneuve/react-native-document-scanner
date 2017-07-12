@@ -1,7 +1,8 @@
+![alt text](https://raw.githubusercontent.com/Michaelvilleneuve/react-native-document-scanner/master/images/mockup.png)
 
 # React Native Document Scanner
 
-![alt text](https://raw.githubusercontent.com/Michaelvilleneuve/react-native-document-scanner/master/images/mockup.png)
+This library allows
 
 ## Getting started
 
@@ -60,3 +61,7 @@ class YourComponent extends Component {
 | Prop | Params | Type | Description |
 | :-------- |:----:| :--------:| :----------|
 | onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string'}` |
+
+## Credits
+
+This repo is a React Native implementation of the following native library : https://github.com/mmackh/IPDFCameraViewController
