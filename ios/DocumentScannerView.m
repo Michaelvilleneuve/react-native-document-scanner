@@ -21,9 +21,16 @@
     if (self) {
         [self setupCameraView];
         [self setEnableBorderDetection:YES];
+        
+        
         [self setOverlayColor: self.overlayColor];
         [self setEnableTorch: self.enableTorch];
-        self.delegate = self;
+        
+        [self setContrast: self.contrast];
+        [self setBrightness: self.brightness];
+        [self setSaturation: self.saturation];
+        
+        [self setDelegate: self];
         [self start];
     }
     

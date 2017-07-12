@@ -9,14 +9,22 @@ class PdfScanner extends React.Component {
     return this.props.onPictureTaken(event.nativeEvent);
   }
   render() {
-    return <RNPdfScanner {...this.props} onPictureTaken={this.sendOnPictureTakenEvent.bind(this)} />;
+    return (
+      <RNPdfScanner
+        {...this.props}
+        onPictureTaken={this.sendOnPictureTakenEvent.bind(this)}
+      />
+    );
   }
 }
 
 PdfScanner.propTypes = {
   onPictureTaken: PropTypes.func,
   overlayColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  enableTorch: PropTypes.bool
+  enableTorch: PropTypes.bool,
+  saturation: PropTypes.number,
+  brightness: PropTypes.number,
+  contrast: PropTypes.number,
 };
 
 export default PdfScanner;

@@ -254,6 +254,25 @@
     }
 }
 
+
+- (void)setContrast:(float)contrast
+{
+    
+    _contrast = contrast;
+}
+
+- (void)setSaturation:(float)saturation
+{
+    _saturation = saturation;
+}
+
+- (void)setBrightness:(float)brightness
+{
+    _brightness = brightness;
+}
+
+
+
 - (void)focusAtPoint:(CGPoint)point completionHandler:(void(^)())completionHandler
 {
     AVCaptureDevice *device = self.captureDevice;
@@ -378,12 +397,12 @@
 
 - (CIImage *)filteredImageUsingEnhanceFilterOnImage:(CIImage *)image
 {
-    return [CIFilter filterWithName:@"CIColorControls" keysAndValues:kCIInputImageKey, image, @"inputBrightness", [NSNumber numberWithFloat:0.0], @"inputContrast", [NSNumber numberWithFloat:1.14], @"inputSaturation", [NSNumber numberWithFloat:0.0], nil].outputImage;
+    return [CIFilter filterWithName:@"CIColorControls" keysAndValues:kCIInputImageKey, image, @"inputBrightness", @(self.brightness), @"inputContrast", @(self.contrast), @"inputSaturation", @(self.saturation), nil].outputImage;
 }
 
 - (CIImage *)filteredImageUsingContrastFilterOnImage:(CIImage *)image
 {
-    return [CIFilter filterWithName:@"CIColorControls" withInputParameters:@{@"inputContrast":@(1.1),kCIInputImageKey:image}].outputImage;
+    return [CIFilter filterWithName:@"CIColorControls" withInputParameters:@{@"inputContrast":@(1.0),kCIInputImageKey:image}].outputImage;
 }
 
 - (CIImage *)correctPerspectiveForImage:(CIImage *)image withFeatures:(CIRectangleFeature *)rectangleFeature

@@ -46,6 +46,9 @@ typedef NS_ENUM(NSInteger, IPDFRectangeType)
 - (void)captureImageWithCompletionHander:(void(^)(id data))completionHandler;
 
 @property (nonatomic, strong) UIColor* overlayColor;
+@property (nonatomic, assign) float saturation;
+@property (nonatomic, assign) float contrast;
+@property (nonatomic, assign) float brightness;
 
 
 @end
