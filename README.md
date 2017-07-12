@@ -20,8 +20,9 @@
 
 ## Usage
 ```javascript
+import React,{ Component } from 'react';
 import { View, Image } from 'react-native';
-import React, { Component } from 'react';
+
 import DocumentScanner from 'react-native-document-scanner';
 
 class YourComponent extends Component {
@@ -57,5 +58,5 @@ class YourComponent extends Component {
 ## Returned image
 
 | Prop | Params | Type | Description |
-| :--- | :----: | :--: | :---------- |
+| :-------- |:----:| :--------:| :----------|
 | onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string'}` |
