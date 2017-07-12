@@ -1,23 +1,23 @@
 ![alt text](https://raw.githubusercontent.com/Michaelvilleneuve/react-native-document-scanner/master/images/mockup.png)
 
-# React Native Document Scanner
+# React Native Document Scanner (iOS only)
 
-This library allows
+Live document detection library. Returns a base64 encoded string of the captured image, allowing you to easily store it or use it as you wish !
+
+Features :
+ - Live detection
+ - Perspective correction and crop of the image
+ - Live camera filters (brightness, saturation, contrast)
+ - Flash
+ - Easy to use base64 image
 
 ## Getting started
 
 `$ npm install react-native-document-scanner --save`
-
-### Automatic installation
-
 `$ react-native link react-native-document-scanner`
 
-### Manual installation
+Edit the `info.plist` file in XCode and add the following permission : `NSCameraUsageDescription`
 
-1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-2. Go to `node_modules` ➜ `react-native-pdf-scanner` and add `RNPdfScanner.xcodeproj`
-3. In XCode, in the project navigator, select your project. Add `libRNPdfScanner.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
-4. Run your project (`Cmd+R`)<
 
 ## Usage
 ```javascript
@@ -62,6 +62,15 @@ class YourComponent extends Component {
 | :-------- |:----:| :--------:| :----------|
 | onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string'}` |
 
+
+### If you prefer manual installation
+
+1. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
+2. Go to `node_modules` ➜ `react-native-pdf-scanner` and add `RNPdfScanner.xcodeproj`
+3. In XCode, in the project navigator, select your project. Add `libRNPdfScanner.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+4. Run your project (`Cmd+R`)<
+
 ## Credits
 
 This repo is a React Native implementation of the following native library : https://github.com/mmackh/IPDFCameraViewController
+Special thank to Mark Peysale :)
