@@ -9,22 +9,40 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
+  Image,
+  TouchableOpacity,
   View
 } from 'react-native';
 import PdfScanner from 'react-native-pdf-scanner';
 
 export default class Example extends Component {
-  alert(params) {
-    alert('coucou');
-    console.log(params);
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: null
+    };
   }
+
   render() {
     return (
       <View style={styles.container}>
-        <PdfScanner onPictureTaken={this.alert.bind(this)} style={{ flex: 1, width: 400, height: 400, borderColor: 'orange', borderWidth: 1 }} />
+        {this.state.image ?
+          <Image style={{ flex: 1, width: 300, height: 200 }} source={{ uri: `data:image/png;base64,${this.state.image}`}} resizeMode="contain" /> :
+          <PdfScanner
+            onPictureTaken={data => this.setState({ image: data.image })}
+            overlayColor="rgba(255,130,0, 0.7)"
+            style={{ flex: 1, width: 400, height: 200, borderColor: 'orange', borderWidth: 1 }}
+          />
+        }
         <Text style={styles.instructions}>
-          This is an example of react-native-pdf-scanner
+          This is an example of react-native-pdf-scanner 🤗
         </Text>
+        {this.state.image === null ?
+          null :
+          <TouchableOpacity style={{ height: 100, alignItems: 'center', justifyContent: 'center' }} onPress={() => this.setState({ image: "" })}>
+            <Text>Take another pic</Text>
+          </TouchableOpacity>
+        }
       </View>
     );
   }

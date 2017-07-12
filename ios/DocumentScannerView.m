@@ -21,6 +21,7 @@
     if (self) {
         [self setupCameraView];
         [self setEnableBorderDetection:YES];
+        [self setOverlayColor: self.overlayColor];
         self.delegate = self;
         [self start];
     }
@@ -34,6 +35,9 @@
         case IPDFRectangeTypeGood:
             self.stableCounter ++;
             break;
+        case IPDFRectangeTypeBadAngle:
+            self.stableCounter ++;
+            break;
         default:
             self.stableCounter = 0;
             break;
@@ -41,7 +45,9 @@
     if (self.stableCounter > 5){
         [self captureImageWithCompletionHander:^(id data) {
            if (self.onPictureTaken) {
-               self.onPictureTaken(@{@"image": data});
+               NSData *imageData = UIImagePNGRepresentation(data);
+               self.onPictureTaken(@{@"image": [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]});
+               [self stop];
            }
         }];
     }
