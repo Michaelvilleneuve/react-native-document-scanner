@@ -13,7 +13,10 @@ class PdfScanner extends React.Component {
       <RNPdfScanner
         {...this.props}
         onPictureTaken={this.sendOnPictureTakenEvent.bind(this)}
-      />
+        brightness={this.props.brightness||0}
+        saturation={this.props.saturation||1}
+        contrast={this.props.contrast||1}
+      />;
     );
   }
 }
