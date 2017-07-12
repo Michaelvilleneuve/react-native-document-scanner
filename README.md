@@ -18,6 +18,8 @@ Features :
 
 Edit the `info.plist` file in XCode and add the following permission : `NSCameraUsageDescription`
 
+Remember, this library uses your device camera, you can't run it on a simulator.
+
 
 ## Usage
 ```javascript
