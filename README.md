@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/Michaelvilleneuve/react-native-document-scanner/master/images/mockup.png)
+![Demo gif](https://raw.githubusercontent.com/Michaelvilleneuve/react-native-document-scanner/master/images/demo.gif)
 
 # React Native Document Scanner (iOS only)
 
@@ -14,6 +14,7 @@ Features :
 ## Getting started
 
 `$ npm install react-native-document-scanner --save`
+
 `$ react-native link react-native-document-scanner`
 
 Edit the `info.plist` file in XCode and add the following permission : `NSCameraUsageDescription`
