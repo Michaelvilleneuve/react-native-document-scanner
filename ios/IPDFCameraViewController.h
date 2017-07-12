@@ -47,4 +47,5 @@ typedef NS_ENUM(NSInteger, IPDFRectangeType)
 
 @property (nonatomic, strong) UIColor* overlayColor;
 
+
 @end

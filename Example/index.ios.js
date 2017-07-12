@@ -19,7 +19,8 @@ export default class Example extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: null
+      image: null,
+      flashEnabled: false,
     };
   }
 
@@ -31,6 +32,7 @@ export default class Example extends Component {
           <PdfScanner
             onPictureTaken={data => this.setState({ image: data.image })}
             overlayColor="rgba(255,130,0, 0.7)"
+            enableTorch={this.state.flashEnabled}
             style={{ flex: 1, width: 400, height: 200, borderColor: 'orange', borderWidth: 1 }}
           />
         }
@@ -39,10 +41,14 @@ export default class Example extends Component {
         </Text>
         {this.state.image === null ?
           null :
-          <TouchableOpacity style={{ height: 100, alignItems: 'center', justifyContent: 'center' }} onPress={() => this.setState({ image: "" })}>
+          <TouchableOpacity style={styles.newPic} onPress={() => this.setState({ image: "" })}>
             <Text>Take another pic</Text>
           </TouchableOpacity>
         }
+
+        <TouchableOpacity style={styles.flashEnabledButton} onPress={() => this.setState({ flashEnabled: !this.state.flashEnabled })}>
+          <Text>📸 Flash</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -54,6 +60,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  newPic: {
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  flashEnabledButton: {
+    position: 'absolute',
+    top: 20,
+    bottom: 20,
+    height: 40,
+    width: 120,
+    backgroundColor: '#FFF',
   },
   welcome: {
     fontSize: 20,

@@ -22,6 +22,7 @@
         [self setupCameraView];
         [self setEnableBorderDetection:YES];
         [self setOverlayColor: self.overlayColor];
+        [self setEnableTorch: self.enableTorch];
         self.delegate = self;
         [self start];
     }

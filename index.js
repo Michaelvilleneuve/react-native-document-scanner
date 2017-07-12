@@ -16,6 +16,7 @@ class PdfScanner extends React.Component {
 PdfScanner.propTypes = {
   onPictureTaken: PropTypes.func,
   overlayColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  enableTorch: PropTypes.bool
 };
 
 export default PdfScanner;
