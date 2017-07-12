@@ -1,11 +1,15 @@
 
 {
-  "name": "react-native-pdf-scanner",
+  "name": "react-native-document-scanner",
   "description": "Scan documents, automatic border detection, automatic crop",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/Michaelvilleneuve/react-native-document-scanner"
   },
   "keywords": [
     "react-native",
@@ -13,7 +17,7 @@
     "ios"
   ],
   "author": "Michaël Villeneuve",
-  "license": "",
+  "license": "MIT",
   "peerDependencies": {
     "react-native": "0.45.1"
   }
