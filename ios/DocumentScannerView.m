@@ -21,19 +21,19 @@
     if (self) {
         [self setupCameraView];
         [self setEnableBorderDetection:YES];
-        
-        
+
+
         [self setOverlayColor: self.overlayColor];
         [self setEnableTorch: self.enableTorch];
-        
+
         [self setContrast: self.contrast];
         [self setBrightness: self.brightness];
         [self setSaturation: self.saturation];
-        
+
         [self setDelegate: self];
         [self start];
     }
-    
+
     return self;
 }
 
@@ -41,9 +41,6 @@
 - (void) didDetectRectangle:(CIRectangleFeature *)rectangle withType:(IPDFRectangeType)type {
     switch (type) {
         case IPDFRectangeTypeGood:
-            self.stableCounter ++;
-            break;
-        case IPDFRectangeTypeBadAngle:
             self.stableCounter ++;
             break;
         default:
