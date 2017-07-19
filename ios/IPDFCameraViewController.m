@@ -24,6 +24,7 @@
 @property (nonatomic, strong) AVCaptureStillImageOutput* stillImageOutput;
 
 @property (nonatomic, assign) BOOL forceStop;
+@property (nonatomic, assign) float lastDetectionRate;
 
 @end
 
@@ -218,9 +219,19 @@
     
     [self.captureSession startRunning];
     
-    _borderDetectTimeKeeper = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(enableBorderDetectFrame) userInfo:nil repeats:YES];
+    float detectionRefreshRate = _detectionRefreshRateInMS;
+    CGFloat detectionRefreshRateInSec = detectionRefreshRate/100;
+    
+    if (_lastDetectionRate != _detectionRefreshRateInMS) {
+        if (_borderDetectTimeKeeper) {
+            [_borderDetectTimeKeeper invalidate];
+        }
+        _borderDetectTimeKeeper = [NSTimer scheduledTimerWithTimeInterval:detectionRefreshRateInSec target:self selector:@selector(enableBorderDetectFrame) userInfo:nil repeats:YES];
+    }
     
     [self hideGLKView:NO completion:nil];
+    
+    _lastDetectionRate = _detectionRefreshRateInMS;
 }
 
 - (void)stop
@@ -271,6 +282,11 @@
     _brightness = brightness;
 }
 
+- (void)setDetectionRefreshRateInMS:(NSInteger)detectionRefreshRateInMS
+{
+    _detectionRefreshRateInMS = detectionRefreshRateInMS;
+    NSLog(@"lol : %ld", (long)_detectionRefreshRateInMS);
+}
 
 
 - (void)focusAtPoint:(CGPoint)point completionHandler:(void(^)())completionHandler
@@ -397,6 +413,7 @@
 
 - (CIImage *)filteredImageUsingEnhanceFilterOnImage:(CIImage *)image
 {
+    [self start];
     return [CIFilter filterWithName:@"CIColorControls" keysAndValues:kCIInputImageKey, image, @"inputBrightness", @(self.brightness), @"inputContrast", @(self.contrast), @"inputSaturation", @(self.saturation), nil].outputImage;
 }
 

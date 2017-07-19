@@ -13,7 +13,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import PdfScanner from 'react-native-pdf-scanner';
+import Scanner from 'react-native-document-scanner';
 
 export default class Example extends Component {
   constructor(props) {
@@ -24,23 +24,42 @@ export default class Example extends Component {
     };
   }
 
+  renderDetectionType() {
+    switch (this.state.lastDetectionType) {
+      case 0:
+        return "Correct rectangle found"
+      case 1:
+        return "Bad angle found";
+      case 2:
+        return "Rectangle too far";
+      default:
+        return "No rectangle detected yet";
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
         {this.state.image ?
           <Image style={{ flex: 1, width: 300, height: 200 }} source={{ uri: `data:image/png;base64,${this.state.image}`}} resizeMode="contain" /> :
-          <PdfScanner
+          <Scanner
             onPictureTaken={data => this.setState({ image: data.image })}
             overlayColor="rgba(255,130,0, 0.7)"
             enableTorch={this.state.flashEnabled}
-            brightness={0}
-            saturation={1}
-            contrast={1.1}
+            brightness={0.2}
+            saturation={0}
+            contrast={1.2}
+            onRectangleDetect={({ stableCounter, lastDetectionType }) => this.setState({ stableCounter, lastDetectionType })}
+            detectionCountBeforeCapture={10}
+            detectionRefreshRateInMS={50}
             style={styles.scanner}
           />
         }
         <Text style={styles.instructions}>
-          This is a great example of react-native-pdf-scanner 🤗
+          ({this.state.stableCounter || 0} correctly formated rectangle detected
+        </Text>
+        <Text style={styles.instructions}>
+          {this.renderDetectionType()}
         </Text>
         {this.state.image === null ?
           null :

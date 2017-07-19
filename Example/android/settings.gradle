@@ -1,4 +1,6 @@
 rootProject.name = 'Example'
+include ':react-native-document-scanner'
+project(':react-native-document-scanner').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-document-scanner/android')
 include ':react-native-pdf-scanner'
 project(':react-native-pdf-scanner').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-pdf-scanner/android')
 

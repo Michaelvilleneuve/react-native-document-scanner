@@ -9,11 +9,6 @@
 #import "DocumentScannerView.h"
 #import "IPDFCameraViewController.h"
 
-@interface DocumentScannerView()
-@property (assign, nonatomic) NSInteger stableCounter;
-@end
-
-
 @implementation DocumentScannerView
 
 - (instancetype)init {
@@ -29,9 +24,12 @@
         [self setContrast: self.contrast];
         [self setBrightness: self.brightness];
         [self setSaturation: self.saturation];
-
-        [self setDelegate: self];
+        
+        NSLog(@"detectionCountBeforeCapture:  %ld", (long)self.detectionCountBeforeCapture);
+        NSLog(@"detectionRefreshRateInMS:  %ld", (long)self.detectionRefreshRateInMS);
+        
         [self start];
+        [self setDelegate: self];
     }
 
     return self;
@@ -47,7 +45,11 @@
             self.stableCounter = 0;
             break;
     }
-    if (self.stableCounter > 5){
+    if (self.onRectangleDetect) {
+        self.onRectangleDetect(@{@"stableCounter": @(self.stableCounter), @"lastDetectionType": @(type)});
+    }
+    
+    if (self.stableCounter > self.detectionCountBeforeCapture){
         [self captureImageWithCompletionHander:^(id data) {
            if (self.onPictureTaken) {
                NSData *imageData = UIImagePNGRepresentation(data);
