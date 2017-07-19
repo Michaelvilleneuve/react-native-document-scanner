@@ -40,6 +40,9 @@ class YourComponent extends Component {
           brightness={0.3}
           saturation={1}
           contrast={1.1}
+          onRectangleDetect={({ stableCounter, lastDetectionType }) => this.setState({ stableCounter, lastDetectionType })}
+          detectionCountBeforeCapture={5}
+          detectionRefreshRateInMS={50}
         />
         <Image source={{ uri: `data:image/png;base64,${this.state.image}`}} resizeMode="contain" />
       </View>
@@ -54,16 +57,38 @@ class YourComponent extends Component {
 | Prop  | Default  | Type | Description |
 | :-------- |:----:| :--------:| :----------|
 | overlayColor | `none` | `string` | Color of the detected rectangle : rgba recommended |
+| detectionCountBeforeCapture | `5` | `integer` | Number of correct rectangle to detect before capture |
+| detectionRefreshRateInMS | `50` | `integer` | Time between two rectangle detection attempt |
 | enableTorch | `false` | `bool` | Allows to active or deactivate flash during document detection |
 | brightness | `0` | `float` | Increase or decrease camera brightness. Normal as default. |
 | saturation | `1` | `float` | Increase or decrease camera saturation. Set `0` for black & white |
 | contrast | `1` | `float` | Increase or decrease camera contrast. Normal as default |
+
+## Each rectangle detection
+| Prop | Params | Type | Description |
+| :------ | :----: | :------:| :--------|
+| onRectangleDetect | `{ stableCounter, lastDetectionType }` | `object` | See below |
+
+The returned object includes the following keys :
+
+`stableCounter`
+---
+Number of correctly formated rectangle found (this number triggers capture once it goes above `detectionCountBeforeCapture`)
+
+`lastDetectionType`
+---
+Enum (0, 1 or 2) corresponding to the type of rectangle found
+0. Correctly formated rectangle
+1. Wrong perspective, bad angle
+2. Too far
+
 
 ## Returned image
 
 | Prop | Params | Type | Description |
 | :-------- |:----:| :--------:| :----------|
 | onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string'}` |
+
 
 
 ### If you prefer manual installation
