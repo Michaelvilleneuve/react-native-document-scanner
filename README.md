@@ -65,18 +65,18 @@ class YourComponent extends Component {
 | contrast | `1` | `float` | Increase or decrease camera contrast. Normal as default |
 
 ## Each rectangle detection
-| Prop | Params | Type | Description |
-| :------ | :------: | :--------:| :--------|
-| onRectangleDetect | `{ stableCounter, lastDetectionType }` | `object` | See below |
+| Props             | Params                                 | Type     | Description |
+|-------------------|----------------------------------------|----------|-------------|
+| onRectangleDetect | `{ stableCounter, lastDetectionType }` | `object` | See below   |
 
 The returned object includes the following keys :
 
-`stableCounter`
----
+- `stableCounter`
+
 Number of correctly formated rectangle found (this number triggers capture once it goes above `detectionCountBeforeCapture`)
 
-`lastDetectionType`
----
+- `lastDetectionType`
+
 Enum (0, 1 or 2) corresponding to the type of rectangle found
 0. Correctly formated rectangle
 1. Wrong perspective, bad angle
@@ -86,7 +86,7 @@ Enum (0, 1 or 2) corresponding to the type of rectangle found
 ## Returned image
 
 | Prop | Params | Type | Description |
-| :----------- | :-------: | :--------:| :----------|
+| :----------- |:-------:| :--------:| :----------|
 | onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string'}` |
 
 
