@@ -66,7 +66,7 @@ class YourComponent extends Component {
 
 ## Each rectangle detection
 | Prop | Params | Type | Description |
-| :------ | :----: | :------:| :--------|
+| :------ | :------: | :--------:| :--------|
 | onRectangleDetect | `{ stableCounter, lastDetectionType }` | `object` | See below |
 
 The returned object includes the following keys :
@@ -86,7 +86,7 @@ Enum (0, 1 or 2) corresponding to the type of rectangle found
 ## Returned image
 
 | Prop | Params | Type | Description |
-| :-------- |:----:| :--------:| :----------|
+| :----------- | :-------: | :--------:| :----------|
 | onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string'}` |
 
 
