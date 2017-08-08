@@ -41,7 +41,7 @@ export default class Example extends Component {
     return (
       <View style={styles.container}>
         {this.state.image ?
-          <Image style={{ flex: 1, width: 300, height: 200 }} source={{ uri: `data:image/png;base64,${this.state.image}`}} resizeMode="contain" /> :
+          <Image style={{ flex: 1, width: 300, height: 200 }} source={{ uri: `data:image/jpeg;base64,${this.state.image}`}} resizeMode="contain" /> :
           <Scanner
             onPictureTaken={data => this.setState({ image: data.image })}
             overlayColor="rgba(255,130,0, 0.7)"
