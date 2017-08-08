@@ -40,6 +40,7 @@ class YourComponent extends Component {
           brightness={0.3}
           saturation={1}
           contrast={1.1}
+          quality={0.5}
           onRectangleDetect={({ stableCounter, lastDetectionType }) => this.setState({ stableCounter, lastDetectionType })}
           detectionCountBeforeCapture={5}
           detectionRefreshRateInMS={50}
@@ -63,6 +64,7 @@ class YourComponent extends Component {
 | brightness | `0` | `float` | Increase or decrease camera brightness. Normal as default. |
 | saturation | `1` | `float` | Increase or decrease camera saturation. Set `0` for black & white |
 | contrast | `1` | `float` | Increase or decrease camera contrast. Normal as default |
+| quality | `0.8` | `float` | Image compression. Reduces both image size and quality |
 
 ## Each rectangle detection
 | Props             | Params                                 | Type     | Description |
