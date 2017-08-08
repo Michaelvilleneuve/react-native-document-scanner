@@ -44,7 +44,7 @@ class YourComponent extends Component {
           detectionCountBeforeCapture={5}
           detectionRefreshRateInMS={50}
         />
-        <Image source={{ uri: `data:image/png;base64,${this.state.image}`}} resizeMode="contain" />
+        <Image source={{ uri: `data:image/jpeg;base64,${this.state.image}`}} resizeMode="contain" />
       </View>
     );
   }

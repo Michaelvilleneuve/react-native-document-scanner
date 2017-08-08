@@ -48,6 +48,7 @@ export default class Example extends Component {
             enableTorch={this.state.flashEnabled}
             brightness={0.2}
             saturation={0}
+            quality={0.5}
             contrast={1.2}
             onRectangleDetect={({ stableCounter, lastDetectionType }) => this.setState({ stableCounter, lastDetectionType })}
             detectionCountBeforeCapture={10}

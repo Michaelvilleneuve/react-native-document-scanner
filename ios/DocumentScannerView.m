@@ -24,10 +24,10 @@
         [self setContrast: self.contrast];
         [self setBrightness: self.brightness];
         [self setSaturation: self.saturation];
-        
+
         NSLog(@"detectionCountBeforeCapture:  %ld", (long)self.detectionCountBeforeCapture);
         NSLog(@"detectionRefreshRateInMS:  %ld", (long)self.detectionRefreshRateInMS);
-        
+
         [self start];
         [self setDelegate: self];
     }
@@ -48,11 +48,11 @@
     if (self.onRectangleDetect) {
         self.onRectangleDetect(@{@"stableCounter": @(self.stableCounter), @"lastDetectionType": @(type)});
     }
-    
+
     if (self.stableCounter > self.detectionCountBeforeCapture){
         [self captureImageWithCompletionHander:^(id data) {
            if (self.onPictureTaken) {
-               NSData *imageData = UIImagePNGRepresentation(data);
+               NSData *imageData = UIImageJPEGRepresentation(data, self.quality);
                self.onPictureTaken(@{@"image": [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]});
                [self stop];
            }

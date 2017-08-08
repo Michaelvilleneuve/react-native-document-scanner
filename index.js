@@ -15,6 +15,13 @@ class PdfScanner extends React.Component {
     return this.props.onRectangleDetect(event.nativeEvent);
   }
 
+  getImageQuality() {
+    if (!this.props.quality) return 0.8;
+    if (this.props.quality > 1) return 1;
+    if (this.props.quality < 0.1) return 0.1;
+    return this.props.quality;
+  }
+
   render() {
     return (
       <RNPdfScanner
@@ -24,6 +31,7 @@ class PdfScanner extends React.Component {
         brightness={this.props.brightness||0}
         saturation={typeof this.props.saturation === 'undefined' ? 1 : this.props.saturation}
         contrast={this.props.contrast||1}
+        quality={this.getImageQuality()}
         detectionCountBeforeCapture={this.props.detectionCountBeforeCapture||5}
         detectionRefreshRateInMS={this.props.detectionRefreshRateInMS||50}
       />
@@ -41,6 +49,7 @@ PdfScanner.propTypes = {
   contrast: PropTypes.number,
   detectionCountBeforeCapture: PropTypes.number,
   detectionRefreshRateInMS: PropTypes.number,
+  quality: PropTypes.number,
 };
 
 export default PdfScanner;

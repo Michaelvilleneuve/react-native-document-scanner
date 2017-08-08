@@ -15,6 +15,7 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onRectangleDetect;
 @property (nonatomic, assign) NSInteger detectionCountBeforeCapture;
 @property (assign, nonatomic) NSInteger stableCounter;
+@property (nonatomic, assign) float quality;
 
 
 @end
