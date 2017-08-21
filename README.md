@@ -11,7 +11,7 @@ Features :
  - Flash
  - Easy to use base64 image
 
- #### Can be easily plugged with [react-native-custom-crop](https://github.com/Michaelvilleneuve/react-native-custom-crop)
+ #### Can be easily plugged with [react-native-perspective-image-cropper](https://github.com/Michaelvilleneuve/react-native-perspective-image-cropper)
 
 
  ![Demo crop gif](https://camo.githubusercontent.com/0ac887deaa7263172a5fd2759dba3d692e98585a/68747470733a2f2f73332d65752d776573742d312e616d617a6f6e6177732e636f6d2f6d69636861656c76696c6c656e657576652f64656d6f2d63726f702e676966)
