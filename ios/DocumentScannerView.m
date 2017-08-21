@@ -1,11 +1,3 @@
-//
-//  DocumentScannerView.m
-//  DocumentScanner
-//
-//  Created by Marc PEYSALE on 22/06/2017.
-//  Copyright © 2017 Snapp'. All rights reserved.
-//
-
 #import "DocumentScannerView.h"
 #import "IPDFCameraViewController.h"
 
@@ -25,8 +17,6 @@
         [self setBrightness: self.brightness];
         [self setSaturation: self.saturation];
 
-        NSLog(@"detectionCountBeforeCapture:  %ld", (long)self.detectionCountBeforeCapture);
-        NSLog(@"detectionRefreshRateInMS:  %ld", (long)self.detectionRefreshRateInMS);
 
         [self start];
         [self setDelegate: self];
@@ -50,10 +40,34 @@
     }
 
     if (self.stableCounter > self.detectionCountBeforeCapture){
-        [self captureImageWithCompletionHander:^(id data) {
+        [self captureImageWithCompletionHander:^(UIImage *croppedImage, UIImage *initialImage, CIRectangleFeature *rectangleFeature) {
            if (self.onPictureTaken) {
-               NSData *imageData = UIImageJPEGRepresentation(data, self.quality);
-               self.onPictureTaken(@{@"image": [imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]});
+               NSData *croppedImageData = UIImageJPEGRepresentation(croppedImage, self.quality);
+
+               if (initialImage.imageOrientation != UIImageOrientationUp) {
+                   UIGraphicsBeginImageContextWithOptions(initialImage.size, false, initialImage.scale);
+                   [initialImage drawInRect:CGRectMake(0, 0, initialImage.size.width
+                                                , initialImage.size.height)];
+                   initialImage = UIGraphicsGetImageFromCurrentImageContext();
+                   UIGraphicsEndImageContext();
+               }
+               NSData *initialImageData = UIImageJPEGRepresentation(initialImage, self.quality);
+
+               /*
+                RectangleCoordinates expects a rectanle viewed from portrait,
+                while rectangleFeature returns a rectangle viewed from landscape, which explains the nonsense of the mapping below.
+                Sorry about that.
+                */
+               self.onPictureTaken(@{
+                                     @"croppedImage": [croppedImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength],
+                                     @"initialImage": [initialImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength],
+                                     @"rectangleCoordinates": @{
+                                             @"topLeft": @{ @"y": @(rectangleFeature.bottomLeft.x + 30), @"x": @(rectangleFeature.bottomLeft.y)},
+                                             @"topRight": @{ @"y": @(rectangleFeature.topLeft.x + 30), @"x": @(rectangleFeature.topLeft.y)},
+                                             @"bottomLeft": @{ @"y": @(rectangleFeature.bottomRight.x), @"x": @(rectangleFeature.bottomRight.y)},
+                                             @"bottomRight": @{ @"y": @(rectangleFeature.topRight.x), @"x": @(rectangleFeature.topRight.y)},
+                                             }
+                                     });
                [self stop];
            }
         }];

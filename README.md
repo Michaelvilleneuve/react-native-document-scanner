@@ -11,6 +11,11 @@ Features :
  - Flash
  - Easy to use base64 image
 
+ #### Can be easily plugged with [react-native-custom-crop](https://github.com/Michaelvilleneuve/react-native-custom-crop)
+
+
+ ![Demo crop gif](https://camo.githubusercontent.com/0ac887deaa7263172a5fd2759dba3d692e98585a/68747470733a2f2f73332d65752d776573742d312e616d617a6f6e6177732e636f6d2f6d69636861656c76696c6c656e657576652f64656d6f2d63726f702e676966)
+
 ## Getting started
 
 `$ npm install react-native-document-scanner --save`
@@ -34,7 +39,11 @@ class YourComponent extends Component {
     return (
       <View>
         <DocumentScanner
-          onPictureTaken={data => this.setState({ image: data.image })}
+          onPictureTaken={data => this.setState({
+            image: data.image,
+            initialImage: data.initialImage,
+            rectangleCoordinates: data.rectangleCoordinates,
+          })}
           overlayColor="rgba(255,130,0, 0.7)"
           enableTorch={false}
           brightness={0.3}
@@ -89,7 +98,7 @@ Enum (0, 1 or 2) corresponding to the type of rectangle found
 
 | Prop | Params | Type | Description |
 | :----------- |:-------:| :--------:| :----------|
-| onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string'}` |
+| onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string', initialImage: 'BASE64 string', rectangleCoordinates: 'object of coordinates' }` |
 
 
 
