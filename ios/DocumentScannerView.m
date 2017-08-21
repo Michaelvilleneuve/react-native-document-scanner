@@ -40,38 +40,44 @@
     }
 
     if (self.stableCounter > self.detectionCountBeforeCapture){
-        [self captureImageWithCompletionHander:^(UIImage *croppedImage, UIImage *initialImage, CIRectangleFeature *rectangleFeature) {
-           if (self.onPictureTaken) {
-               NSData *croppedImageData = UIImageJPEGRepresentation(croppedImage, self.quality);
-
-               if (initialImage.imageOrientation != UIImageOrientationUp) {
-                   UIGraphicsBeginImageContextWithOptions(initialImage.size, false, initialImage.scale);
-                   [initialImage drawInRect:CGRectMake(0, 0, initialImage.size.width
-                                                , initialImage.size.height)];
-                   initialImage = UIGraphicsGetImageFromCurrentImageContext();
-                   UIGraphicsEndImageContext();
-               }
-               NSData *initialImageData = UIImageJPEGRepresentation(initialImage, self.quality);
-
-               /*
-                RectangleCoordinates expects a rectanle viewed from portrait,
-                while rectangleFeature returns a rectangle viewed from landscape, which explains the nonsense of the mapping below.
-                Sorry about that.
-                */
-               self.onPictureTaken(@{
-                                     @"croppedImage": [croppedImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength],
-                                     @"initialImage": [initialImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength],
-                                     @"rectangleCoordinates": @{
-                                             @"topLeft": @{ @"y": @(rectangleFeature.bottomLeft.x + 30), @"x": @(rectangleFeature.bottomLeft.y)},
-                                             @"topRight": @{ @"y": @(rectangleFeature.topLeft.x + 30), @"x": @(rectangleFeature.topLeft.y)},
-                                             @"bottomLeft": @{ @"y": @(rectangleFeature.bottomRight.x), @"x": @(rectangleFeature.bottomRight.y)},
-                                             @"bottomRight": @{ @"y": @(rectangleFeature.topRight.x), @"x": @(rectangleFeature.topRight.y)},
-                                             }
-                                     });
-               [self stop];
-           }
-        }];
+        [self capture];
     }
+}
+
+- (void) capture {
+    [self captureImageWithCompletionHander:^(UIImage *croppedImage, UIImage *initialImage, CIRectangleFeature *rectangleFeature) {
+
+        if (self.onPictureTaken) {
+            NSData *croppedImageData = UIImageJPEGRepresentation(croppedImage, self.quality);
+
+            if (initialImage.imageOrientation != UIImageOrientationUp) {
+                UIGraphicsBeginImageContextWithOptions(initialImage.size, false, initialImage.scale);
+                [initialImage drawInRect:CGRectMake(0, 0, initialImage.size.width
+                                                    , initialImage.size.height)];
+                initialImage = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+            }
+            NSData *initialImageData = UIImageJPEGRepresentation(initialImage, self.quality);
+
+            /*
+             RectangleCoordinates expects a rectanle viewed from portrait,
+             while rectangleFeature returns a rectangle viewed from landscape, which explains the nonsense of the mapping below.
+             Sorry about that.
+             */
+            NSDictionary *rectangleCoordinates = rectangleFeature ? @{
+                                     @"topLeft": @{ @"y": @(rectangleFeature.bottomLeft.x + 30), @"x": @(rectangleFeature.bottomLeft.y)},
+                                     @"topRight": @{ @"y": @(rectangleFeature.topLeft.x + 30), @"x": @(rectangleFeature.topLeft.y)},
+                                     @"bottomLeft": @{ @"y": @(rectangleFeature.bottomRight.x), @"x": @(rectangleFeature.bottomRight.y)},
+                                     @"bottomRight": @{ @"y": @(rectangleFeature.topRight.x), @"x": @(rectangleFeature.topRight.y)},
+                                     } : [NSNull null];
+            self.onPictureTaken(@{
+                                  @"croppedImage": [croppedImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength],
+                                  @"initialImage": [initialImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength],
+                                  @"rectangleCoordinates": rectangleCoordinates });
+        }
+        [self stop];
+    }];
+
 }
 
 

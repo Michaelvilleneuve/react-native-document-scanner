@@ -2,12 +2,17 @@
 #import "RNPdfScannerManager.h"
 #import "DocumentScannerView.h"
 
+@interface RNPdfScannerManager()
+@property (strong, nonatomic) DocumentScannerView *scannerView;
+@end
+
 @implementation RNPdfScannerManager
 
 - (dispatch_queue_t)methodQueue
 {
     return dispatch_get_main_queue();
 }
+
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_VIEW_PROPERTY(onPictureTaken, RCTBubblingEventBlock)
@@ -23,8 +28,14 @@ RCT_EXPORT_VIEW_PROPERTY(quality, float)
 RCT_EXPORT_VIEW_PROPERTY(brightness, float)
 RCT_EXPORT_VIEW_PROPERTY(contrast, float)
 
+RCT_EXPORT_METHOD(capture) {
+
+    [_scannerView capture];
+}
+
 - (UIView*) view {
-    return [[DocumentScannerView alloc] init];
+    _scannerView = [[DocumentScannerView alloc] init];
+    return _scannerView;
 }
 
 @end

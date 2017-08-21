@@ -75,6 +75,18 @@ class YourComponent extends Component {
 | contrast | `1` | `float` | Increase or decrease camera contrast. Normal as default |
 | quality | `0.8` | `float` | Image compression. Reduces both image size and quality |
 
+## Manual capture
+
+- First get component ref
+```javascript
+<DocumentScanner ref={(ref) => this.scanner = ref} />
+```
+
+- Then call :
+```javascript
+this.scanner.capture();
+```
+
 ## Each rectangle detection
 | Props             | Params                                 | Type     | Description |
 |-------------------|----------------------------------------|----------|-------------|

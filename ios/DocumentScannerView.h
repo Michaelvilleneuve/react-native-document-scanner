@@ -9,5 +9,6 @@
 @property (assign, nonatomic) NSInteger stableCounter;
 @property (nonatomic, assign) float quality;
 
+- (void) capture;
 
 @end

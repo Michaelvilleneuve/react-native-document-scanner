@@ -387,6 +387,10 @@
                      [weakSelf hideGLKView:NO completion:nil];
                      completionHandler(image, initialImage, rectangleFeature);
                  }
+             } else {
+                 [weakSelf hideGLKView:NO completion:nil];
+                 UIImage *initialImage = [UIImage imageWithData:imageData];
+                 completionHandler(initialImage, initialImage, nil);
              }
 
          }
