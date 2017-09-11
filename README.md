@@ -40,7 +40,7 @@ class YourComponent extends Component {
       <View>
         <DocumentScanner
           onPictureTaken={data => this.setState({
-            image: data.image,
+            image: data.croppedImage,
             initialImage: data.initialImage,
             rectangleCoordinates: data.rectangleCoordinates,
           })}
@@ -110,7 +110,7 @@ Enum (0, 1 or 2) corresponding to the type of rectangle found
 
 | Prop | Params | Type | Description |
 | :----------- |:-------:| :--------:| :----------|
-| onPictureTaken | `data` | `object` | Returns the captured image in an object `{ image: 'BASE64 string', initialImage: 'BASE64 string', rectangleCoordinates: 'object of coordinates' }` |
+| onPictureTaken | `data` | `object` | Returns the captured image in an object `{ croppedImage: 'BASE64 string', initialImage: 'BASE64 string', rectangleCoordinates: 'object of coordinates' }` |
 
 
 
