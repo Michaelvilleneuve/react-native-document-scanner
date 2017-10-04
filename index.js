@@ -32,6 +32,7 @@ class PdfScanner extends React.Component {
         {...this.props}
         onPictureTaken={this.sendOnPictureTakenEvent.bind(this)}
         onRectangleDetect={this.sendOnRectanleDetectEvent.bind(this)}
+        useFrontCam={this.props.useFrontCam||false}
         brightness={this.props.brightness||0}
         saturation={this.props.saturation||1}
         contrast={this.props.contrast||1}
@@ -48,6 +49,7 @@ PdfScanner.propTypes = {
   onRectangleDetect: PropTypes.func,
   overlayColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   enableTorch: PropTypes.bool,
+  useFrontCam: PropTypes.bool,
   saturation: PropTypes.number,
   brightness: PropTypes.number,
   contrast: PropTypes.number,

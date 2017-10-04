@@ -91,8 +91,19 @@
 {
     [self createGLKView];
 
-    NSArray *possibleDevices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-    AVCaptureDevice *device = [possibleDevices firstObject];
+    AVCaptureDevice *device = nil;
+    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
+    for (AVCaptureDevice *possibleDevice in devices) {
+        if (self.useFrontCam) {
+            if ([possibleDevice position] == AVCaptureDevicePositionFront) {
+                device = possibleDevice;
+            }
+        } else {
+            if ([possibleDevice position] != AVCaptureDevicePositionFront) {
+                device = possibleDevice;
+            }
+        }
+    }
     if (!device) return;
 
     _imageDedectionConfidence = 0.0;
@@ -265,6 +276,14 @@
     }
 }
 
+- (void)setUseFrontCam:(BOOL)useFrontCam
+{
+    _useFrontCam = useFrontCam;
+    [self stop];
+    [self setupCameraView];
+    [self start];
+}
+
 
 - (void)setContrast:(float)contrast
 {
@@ -285,7 +304,6 @@
 - (void)setDetectionRefreshRateInMS:(NSInteger)detectionRefreshRateInMS
 {
     _detectionRefreshRateInMS = detectionRefreshRateInMS;
-    NSLog(@"lol : %ld", (long)_detectionRefreshRateInMS);
 }
 
 

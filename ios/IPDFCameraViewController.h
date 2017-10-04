@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, IPDFRectangeType)
 
 @property (nonatomic,assign,getter=isBorderDetectionEnabled) BOOL enableBorderDetection;
 @property (nonatomic,assign,getter=isTorchEnabled) BOOL enableTorch;
+@property (nonatomic,assign,getter=isFrontCam) BOOL useFrontCam;
 
 @property (weak, nonatomic) id<IPDFCameraViewControllerDelegate> delegate;
 

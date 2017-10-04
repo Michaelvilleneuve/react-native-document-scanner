@@ -21,6 +21,7 @@ export default class Example extends Component {
     this.state = {
       image: null,
       flashEnabled: false,
+      useFrontCam: false,
     };
   }
 
@@ -46,6 +47,7 @@ export default class Example extends Component {
             onPictureTaken={data => this.setState({ image: data.croppedImage })}
             overlayColor="rgba(255,130,0, 0.7)"
             enableTorch={this.state.flashEnabled}
+            useFrontCam={this.state.useFrontCam}
             brightness={0.2}
             saturation={0}
             quality={0.5}
@@ -69,8 +71,11 @@ export default class Example extends Component {
           </TouchableOpacity>
         }
 
-        <TouchableOpacity style={styles.flashEnabledButton} onPress={() => this.setState({ flashEnabled: !this.state.flashEnabled })}>
+        <TouchableOpacity style={[styles.button, styles.left]} onPress={() => this.setState({ flashEnabled: !this.state.flashEnabled })}>
           <Text>📸 Flash</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.right]} onPress={() => this.setState({ useFrontCam: !this.state.useFrontCam })}>
+          <Text>📸 Front Cam</Text>
         </TouchableOpacity>
       </View>
     );
@@ -89,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  flashEnabledButton: {
+  button: {
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
@@ -99,6 +104,12 @@ const styles = StyleSheet.create({
     height: 40,
     width: 120,
     backgroundColor: '#FFF',
+  },
+  left: {
+    left: 20,
+  },
+  right: {
+    right: 20,
   },
   welcome: {
     fontSize: 20,

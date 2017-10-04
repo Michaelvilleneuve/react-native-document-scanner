@@ -6,19 +6,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [self setupCameraView];
         [self setEnableBorderDetection:YES];
-
-
-        [self setOverlayColor: self.overlayColor];
-        [self setEnableTorch: self.enableTorch];
-
-        [self setContrast: self.contrast];
-        [self setBrightness: self.brightness];
-        [self setSaturation: self.saturation];
-
-
-        [self start];
         [self setDelegate: self];
     }
 
