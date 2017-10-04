@@ -70,6 +70,7 @@ class YourComponent extends Component {
 | detectionCountBeforeCapture | `5` | `integer` | Number of correct rectangle to detect before capture |
 | detectionRefreshRateInMS | `50` | `integer` | Time between two rectangle detection attempt |
 | enableTorch | `false` | `bool` | Allows to active or deactivate flash during document detection |
+| useFrontCam | `false` | `bool` | Allows you to switch between front and back camera |
 | brightness | `0` | `float` | Increase or decrease camera brightness. Normal as default. |
 | saturation | `1` | `float` | Increase or decrease camera saturation. Set `0` for black & white |
 | contrast | `1` | `float` | Increase or decrease camera contrast. Normal as default |
