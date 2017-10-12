@@ -76,7 +76,10 @@
                                      @"rectangleCoordinates": rectangleCoordinates });
             }
         }
-        [self stop];
+
+        if (!self.captureMultiple) {
+          [self stop];
+        }
     }];
 
 }

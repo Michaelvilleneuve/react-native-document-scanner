@@ -85,6 +85,7 @@ class YourComponent extends Component {
 | contrast | `1` | `float` | Increase or decrease camera contrast. Normal as default |
 | quality | `0.8` | `float` | Image compression. Reduces both image size and quality |
 | useBase64 | `false` | `bool` | If base64 representation should be passed instead of image uri's |
+| captureMultiple | `false` | `bool` | Keeps the scanner on after a successful capture |
 
 ## Manual capture
 
