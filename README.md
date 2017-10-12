@@ -26,6 +26,14 @@ Edit the `info.plist` file in XCode and add the following permission : `NSCamera
 
 Remember, this library uses your device camera, you can't run it on a simulator.
 
+### With Cocoapods
+
+If you want to use Cocoapods insteads of `react-native link`, add the following to your Podfile
+
+```
+  pod 'RNPdfScanner', :path => 'node_modules/react-native-document-scanner/ios'
+```
+
 
 ## Usage
 ```javascript
