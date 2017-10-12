@@ -31,7 +31,7 @@ Remember, this library uses your device camera, you can't run it on a simulator.
 If you want to use Cocoapods insteads of `react-native link`, add the following to your Podfile
 
 ```
-  pod 'RNPdfScanner', :path => 'node_modules/react-native-document-scanner/ios'
+  pod 'RNPdfScanner', :path => '../node_modules/react-native-document-scanner/ios'
 ```
 
 
