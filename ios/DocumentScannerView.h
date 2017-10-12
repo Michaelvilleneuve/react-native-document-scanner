@@ -8,6 +8,7 @@
 @property (nonatomic, assign) NSInteger detectionCountBeforeCapture;
 @property (assign, nonatomic) NSInteger stableCounter;
 @property (nonatomic, assign) float quality;
+@property (nonatomic, assign) BOOL useBase64;
 
 - (void) capture;
 

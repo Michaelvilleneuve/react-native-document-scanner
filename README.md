@@ -2,7 +2,7 @@
 
 # React Native Document Scanner (iOS only)
 
-Live document detection library. Returns a base64 encoded string of the captured image, allowing you to easily store it or use it as you wish !
+Live document detection library. Returns either a URI or a base64 encoded string of the captured image, allowing you to easily store it or use it as you wish !
 
 Features :
  - Live detection
@@ -47,6 +47,7 @@ class YourComponent extends Component {
     return (
       <View>
         <DocumentScanner
+          useBase64
           onPictureTaken={data => this.setState({
             image: data.croppedImage,
             initialImage: data.initialImage,
@@ -83,6 +84,7 @@ class YourComponent extends Component {
 | saturation | `1` | `float` | Increase or decrease camera saturation. Set `0` for black & white |
 | contrast | `1` | `float` | Increase or decrease camera contrast. Normal as default |
 | quality | `0.8` | `float` | Image compression. Reduces both image size and quality |
+| useBase64 | `false` | `bool` | If base64 representation should be passed instead of image uri's |
 
 ## Manual capture
 
@@ -119,7 +121,7 @@ Enum (0, 1 or 2) corresponding to the type of rectangle found
 
 | Prop | Params | Type | Description |
 | :----------- |:-------:| :--------:| :----------|
-| onPictureTaken | `data` | `object` | Returns the captured image in an object `{ croppedImage: 'BASE64 string', initialImage: 'BASE64 string', rectangleCoordinates: 'object of coordinates' }` |
+| onPictureTaken | `data` | `object` | Returns the captured image in an object `{ croppedImage: ('URI or BASE64 string'), initialImage: 'URI or BASE64 string', rectangleCoordinates: 'object of coordinates' }` |
 
 
 

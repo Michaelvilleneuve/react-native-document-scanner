@@ -44,6 +44,7 @@ export default class Example extends Component {
         {this.state.image ?
           <Image style={{ flex: 1, width: 300, height: 200 }} source={{ uri: `data:image/jpeg;base64,${this.state.image}`}} resizeMode="contain" /> :
           <Scanner
+            useBase64
             onPictureTaken={data => this.setState({ image: data.croppedImage })}
             overlayColor="rgba(255,130,0, 0.7)"
             enableTorch={this.state.flashEnabled}
