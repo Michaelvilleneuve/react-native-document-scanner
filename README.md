@@ -18,6 +18,8 @@ Features :
 
 ## Getting started
 
+Use version >=1.4.1 if you are using react-native 0.48+
+
 `$ npm install react-native-document-scanner --save`
 
 `$ react-native link react-native-document-scanner`
