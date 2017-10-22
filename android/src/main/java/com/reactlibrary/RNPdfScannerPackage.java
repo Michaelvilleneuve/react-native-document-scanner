@@ -16,7 +16,6 @@ public class RNPdfScannerPackage implements ReactPackage {
       return Arrays.<NativeModule>asList(new RNPdfScannerModule(reactContext));
     }
 
-    @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
       return Collections.emptyList();
     }
