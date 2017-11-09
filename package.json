@@ -1,7 +1,7 @@
 {
   "name": "react-native-document-scanner",
   "description": "Scan documents, automatic border detection, automatic crop",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
