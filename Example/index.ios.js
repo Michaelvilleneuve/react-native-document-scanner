@@ -45,10 +45,7 @@ export default class Example extends Component {
           <Image style={{ flex: 1, width: 300, height: 200 }} source={{ uri: `data:image/jpeg;base64,${this.state.image}`}} resizeMode="contain" /> :
           <Scanner
             useBase64
-            onPictureTaken={data => {
-              this.setState({ image: data.croppedImage })
-              alert(JSON.stringify(data));
-            }}
+            onPictureTaken={data => this.setState({ image: data.croppedImage })}
             overlayColor="rgba(255,130,0, 0.7)"
             enableTorch={this.state.flashEnabled}
             useFrontCam={this.state.useFrontCam}
@@ -60,7 +57,6 @@ export default class Example extends Component {
             detectionCountBeforeCapture={10}
             detectionRefreshRateInMS={50}
             style={styles.scanner}
-            //saveOnDisk
           />
         }
         <Text style={styles.instructions}>
