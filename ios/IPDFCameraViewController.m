@@ -226,34 +226,39 @@
 
 - (void)start
 {
-    _isStopped = NO;
+    if (![self.captureSession isRunning]){     
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            _isStopped = NO;
+            [self.captureSession startRunning];
+            
+            float detectionRefreshRate = _detectionRefreshRateInMS;
+            CGFloat detectionRefreshRateInSec = detectionRefreshRate/100;
 
-    [self.captureSession startRunning];
+            if (_lastDetectionRate != _detectionRefreshRateInMS) {
+                if (_borderDetectTimeKeeper) {
+                    [_borderDetectTimeKeeper invalidate];
+                }
+                _borderDetectTimeKeeper = [NSTimer scheduledTimerWithTimeInterval:detectionRefreshRateInSec target:self selector:@selector(enableBorderDetectFrame) userInfo:nil repeats:YES];
+            }
 
-    float detectionRefreshRate = _detectionRefreshRateInMS;
-    CGFloat detectionRefreshRateInSec = detectionRefreshRate/100;
+            [self hideGLKView:NO completion:nil];
 
-    if (_lastDetectionRate != _detectionRefreshRateInMS) {
-        if (_borderDetectTimeKeeper) {
-            [_borderDetectTimeKeeper invalidate];
-        }
-        _borderDetectTimeKeeper = [NSTimer scheduledTimerWithTimeInterval:detectionRefreshRateInSec target:self selector:@selector(enableBorderDetectFrame) userInfo:nil repeats:YES];
+            _lastDetectionRate = _detectionRefreshRateInMS;
+        });
     }
-
-    [self hideGLKView:NO completion:nil];
-
-    _lastDetectionRate = _detectionRefreshRateInMS;
 }
 
 - (void)stop
 {
-    _isStopped = YES;
+    if ([self.captureSession isRunning]){     
+        _isStopped = YES;
 
-    [self.captureSession stopRunning];
+        [self.captureSession stopRunning];
 
-    [_borderDetectTimeKeeper invalidate];
+        [_borderDetectTimeKeeper invalidate];
 
-    [self hideGLKView:YES completion:nil];
+        [self hideGLKView:YES completion:nil];
+    }
 }
 
 - (void)setEnableTorch:(BOOL)enableTorch
