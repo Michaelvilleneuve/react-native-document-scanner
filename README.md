@@ -47,7 +47,7 @@ import DocumentScanner from 'react-native-document-scanner';
 class YourComponent extends Component {
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <DocumentScanner
           useBase64
           onPictureTaken={data => this.setState({
@@ -61,11 +61,12 @@ class YourComponent extends Component {
           saturation={1}
           contrast={1.1}
           quality={0.5}
+          style={{flex: 2}}
           onRectangleDetect={({ stableCounter, lastDetectionType }) => this.setState({ stableCounter, lastDetectionType })}
           detectionCountBeforeCapture={5}
           detectionRefreshRateInMS={50}
         />
-        <Image source={{ uri: `data:image/jpeg;base64,${this.state.image}`}} resizeMode="contain" />
+        <Image style={{flex:1}} source={{ uri: `data:image/jpeg;base64,${this.state.image}`}} resizeMode="contain" />
       </View>
     );
   }
