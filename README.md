@@ -134,8 +134,3 @@ Enum (0, 1 or 2) corresponding to the type of rectangle found
 2. Go to `node_modules` ➜ `react-native-pdf-scanner` and add `RNPdfScanner.xcodeproj`
 3. In XCode, in the project navigator, select your project. Add `libRNPdfScanner.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 4. Run your project (`Cmd+R`)<
-
-## Credits
-
-This repo is a React Native implementation of the following native library : https://github.com/mmackh/IPDFCameraViewController
-Special thank to Mark Peysale :)
