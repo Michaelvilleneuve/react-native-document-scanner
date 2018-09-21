@@ -1,4 +1,3 @@
-
 #import "RNPdfScannerManager.h"
 #import "DocumentScannerView.h"
 
@@ -18,7 +17,6 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_VIEW_PROPERTY(onPictureTaken, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onRectangleDetect, RCTBubblingEventBlock)
 
-
 RCT_EXPORT_VIEW_PROPERTY(overlayColor, UIColor)
 RCT_EXPORT_VIEW_PROPERTY(enableTorch, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(useFrontCam, BOOL)
@@ -32,8 +30,12 @@ RCT_EXPORT_VIEW_PROPERTY(brightness, float)
 RCT_EXPORT_VIEW_PROPERTY(contrast, float)
 
 RCT_EXPORT_METHOD(capture) {
-
     [_scannerView capture];
+}
+
+RCT_EXPORT_METHOD(stopManually) {
+
+    [_scannerView stopManually];
 }
 
 - (UIView*) view {

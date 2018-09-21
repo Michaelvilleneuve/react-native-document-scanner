@@ -32,6 +32,10 @@
     }
 }
 
+- (void) stopManually {
+    [self stop];
+}
+
 - (void) capture {
     [self captureImageWithCompletionHander:^(UIImage *croppedImage, UIImage *initialImage, CIRectangleFeature *rectangleFeature) {
       if (self.onPictureTaken) {

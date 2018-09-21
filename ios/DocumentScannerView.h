@@ -12,5 +12,6 @@
 @property (nonatomic, assign) BOOL captureMultiple;
 
 - (void) capture;
+- (void) stopManually;
 
 @end
