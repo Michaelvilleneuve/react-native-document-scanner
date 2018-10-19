@@ -127,7 +127,9 @@ Enum (0, 1 or 2) corresponding to the type of rectangle found
 | :----------- |:-------:| :--------:| :----------|
 | onPictureTaken | `data` | `object` | Returns the captured image in an object `{ croppedImage: ('URI or BASE64 string'), initialImage: 'URI or BASE64 string', rectangleCoordinates: 'object of coordinates' }` |
 
-## Save in document
+## Save in app document
+
+![Demo save document](images/demoSaveDocument.png)
 
 If you want to use saveInAppDocument options, then don't forget to add those raws in .plist :
 ```xml
