@@ -129,7 +129,7 @@ Enum (0, 1 or 2) corresponding to the type of rectangle found
 
 ## Save in app document
 
-![Demo save document](images/demoSaveDocument.png){:height="534px" width="300px"}
+![Demo save document](images/demoSaveDocument.png)
 
 If you want to use saveInAppDocument options, then don't forget to add those raws in .plist :
 ```xml
