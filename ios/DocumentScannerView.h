@@ -10,6 +10,7 @@
 @property (nonatomic, assign) float quality;
 @property (nonatomic, assign) BOOL useBase64;
 @property (nonatomic, assign) BOOL captureMultiple;
+@property (nonatomic, assign) BOOL saveInAppDocument;
 
 - (void) capture;
 

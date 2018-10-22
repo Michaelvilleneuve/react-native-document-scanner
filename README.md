@@ -50,6 +50,7 @@ class YourComponent extends Component {
       <View>
         <DocumentScanner
           useBase64
+          saveInAppDocument={false}
           onPictureTaken={data => this.setState({
             image: data.croppedImage,
             initialImage: data.initialImage,
@@ -87,6 +88,7 @@ class YourComponent extends Component {
 | contrast | `1` | `float` | Increase or decrease camera contrast. Normal as default |
 | quality | `0.8` | `float` | Image compression. Reduces both image size and quality |
 | useBase64 | `false` | `bool` | If base64 representation should be passed instead of image uri's |
+| saveInAppDocument | `false` | `bool` | If should save in app document in case of not using base 64 |
 | captureMultiple | `false` | `bool` | Keeps the scanner on after a successful capture |
 
 ## Manual capture
@@ -126,7 +128,15 @@ Enum (0, 1 or 2) corresponding to the type of rectangle found
 | :----------- |:-------:| :--------:| :----------|
 | onPictureTaken | `data` | `object` | Returns the captured image in an object `{ croppedImage: ('URI or BASE64 string'), initialImage: 'URI or BASE64 string', rectangleCoordinates: 'object of coordinates' }` |
 
+## Save in app document
 
+![Demo save document](images/demoSaveDocument.png)
+
+If you want to use saveInAppDocument options, then don't forget to add those raws in .plist :
+```xml
+<key>LSSupportsOpeningDocumentsInPlace</key>
+<true/>
+```
 
 ### If you prefer manual installation
 
