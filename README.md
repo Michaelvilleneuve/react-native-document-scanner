@@ -114,7 +114,7 @@ In order to use the cropper, you must specify onCrop function.
 |-------------------|----------------------------------------|----------|-------------|
 | onCrop | `(data)` | `function` | Function called when you press the done button of the cropper |
 
-# CropperOpts
+### CropperOpts
 
 | Prop  | Default  | Type | Description |
 | :-------- |:----:| :--------:| :----------|
