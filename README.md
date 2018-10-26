@@ -106,6 +106,8 @@ class YourComponent extends Component {
 
 ## Cropper
 
+![Demo cropper](images/embedCropper.gif)
+
 In order to use the cropper, you must specify onCrop function.
 
 | Props             | Params                                 | Type     | Description |
