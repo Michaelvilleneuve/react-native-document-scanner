@@ -10,6 +10,7 @@ Features :
  - Live camera filters (brightness, saturation, contrast)
  - Flash
  - Easy to use base64 image
+ - Native Cropper
 
  #### Can be easily plugged with [react-native-perspective-image-cropper](https://github.com/Michaelvilleneuve/react-native-perspective-image-cropper)
 
@@ -51,6 +52,17 @@ class YourComponent extends Component {
         <DocumentScanner
           useBase64
           saveInAppDocument={false}
+          onCrop={(data) => {
+            console.log('Cropped data : ', data);
+          }}
+          cropperOpts={{
+            base64: true, // false by default
+            // doneButtonTitle: "Valider",
+            // cancelButtonTitle: "Annuler"
+            // saveFile: false, // true by default
+            // directory: '/my/super/path',
+            // fileName: 'test'
+          }}
           onPictureTaken={data => this.setState({
             image: data.croppedImage,
             initialImage: data.initialImage,
@@ -90,6 +102,26 @@ class YourComponent extends Component {
 | useBase64 | `false` | `bool` | If base64 representation should be passed instead of image uri's |
 | saveInAppDocument | `false` | `bool` | If should save in app document in case of not using base 64 |
 | captureMultiple | `false` | `bool` | Keeps the scanner on after a successful capture |
+| cropperOpts | `{}` | `object` | Options for the cropper |
+
+## Cropper
+
+In order to use the cropper, you must specify onCrop function.
+
+| Props             | Params                                 | Type     | Description |
+|-------------------|----------------------------------------|----------|-------------|
+| onCrop | `(data)` | `function` | Function called when you press the done button of the cropper |
+
+# CropperOpts
+
+| Prop  | Default  | Type | Description |
+| :-------- |:----:| :--------:| :----------|
+| base64 | `false` | `bool` | If should return base 64 on crop |
+| doneButtonTitle | `done` | `string` | Title of done button |
+| cancelButtonTitle | `cancel` | `string` | Title of cancel button |
+| saveFile | `true` | `bool` | If should save file or not |
+| directory | `none` | `string` | Set a subdirectory where to store cropped file, if saveInAppDocument is enabled it will create it in document directory, otherwise it will create it in temp directory |
+| fileName | `none` | `string` | Custom fileName, by default it will be called to_cropped_img_TIMESTAMP |
 
 ## Manual capture
 
