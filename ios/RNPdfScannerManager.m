@@ -17,6 +17,7 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_VIEW_PROPERTY(onPictureTaken, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onRectangleDetect, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onCrop, RCTBubblingEventBlock)
 
 
 RCT_EXPORT_VIEW_PROPERTY(overlayColor, UIColor)
@@ -31,9 +32,10 @@ RCT_EXPORT_VIEW_PROPERTY(saturation, float)
 RCT_EXPORT_VIEW_PROPERTY(quality, float)
 RCT_EXPORT_VIEW_PROPERTY(brightness, float)
 RCT_EXPORT_VIEW_PROPERTY(contrast, float)
+RCT_EXPORT_VIEW_PROPERTY(cropperOpts, NSDictionary)
 
 RCT_EXPORT_METHOD(capture) {
-
+    
     [_scannerView capture];
 }
 

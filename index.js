@@ -15,8 +15,13 @@ class PdfScanner extends React.Component {
     return this.props.onRectangleDetect(event.nativeEvent);
   }
 
+  sendOnCropEvent(event) {
+    if (!this.props.onCrop) return null;
+    return this.props.onCrop(event.nativeEvent);
+  }
+
   getImageQuality() {
-    if (!this.props.quality) return 0.8;
+    if (typeof this.props.quality === "undefined") return 0.8;
     if (this.props.quality > 1) return 1;
     if (this.props.quality < 0.1) return 0.1;
     return this.props.quality;
@@ -30,6 +35,11 @@ class PdfScanner extends React.Component {
     return (
       <RNPdfScanner
         {...this.props}
+        cropperOpts={{
+          saveFile: true,
+          ...this.props.cropperOpts
+        }}
+        onCrop={this.sendOnCropEvent.bind(this)}
         onPictureTaken={this.sendOnPictureTakenEvent.bind(this)}
         onRectangleDetect={this.sendOnRectanleDetectEvent.bind(this)}
         useFrontCam={this.props.useFrontCam||false}
@@ -45,6 +55,8 @@ class PdfScanner extends React.Component {
 }
 
 PdfScanner.propTypes = {
+  cropperOpts: PropTypes.object,
+  onCrop: PropTypes.func,
   onPictureTaken: PropTypes.func,
   onRectangleDetect: PropTypes.func,
   overlayColor: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
