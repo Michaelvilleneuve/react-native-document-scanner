@@ -31,6 +31,7 @@ RCT_EXPORT_VIEW_PROPERTY(saturation, float)
 RCT_EXPORT_VIEW_PROPERTY(quality, float)
 RCT_EXPORT_VIEW_PROPERTY(brightness, float)
 RCT_EXPORT_VIEW_PROPERTY(contrast, float)
+RCT_EXPORT_VIEW_PROPERTY(timeBetweenCaptures, NSInteger)
 
 RCT_EXPORT_METHOD(capture) {
 

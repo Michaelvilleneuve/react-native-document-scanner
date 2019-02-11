@@ -8,6 +8,7 @@
     if (self) {
         [self setEnableBorderDetection:YES];
         [self setDelegate: self];
+        [self setLastCapture:[NSDate date]];
     }
 
     return self;
@@ -28,7 +29,9 @@
     }
 
     if (self.stableCounter > self.detectionCountBeforeCapture){
+      if ([self.getLastCapture isEqualToDate:[self.getLastCapture earlierDate:[NSDate date]]] ) {
         [self capture];
+      }
     }
 }
 
@@ -58,6 +61,7 @@
                                      @"bottomRight": @{ @"y": @(rectangleFeature.topRight.x), @"x": @(rectangleFeature.topRight.y)},
                                      } : [NSNull null];
             if (self.useBase64) {
+              [self setLastCapture:[NSDate dateWithTimeIntervalSinceNow:self.timeBetweenCaptures]];
               self.onPictureTaken(@{
                                     @"croppedImage": [croppedImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength],
                                     @"initialImage": [initialImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength],
@@ -73,8 +77,8 @@
 
               [croppedImageData writeToFile:croppedFilePath atomically:YES];
               [initialImageData writeToFile:initialFilePath atomically:YES];
-
-               self.onPictureTaken(@{
+              [self setLastCapture:[NSDate dateWithTimeIntervalSinceNow:self.timeBetweenCaptures]];
+              self.onPictureTaken(@{
                                      @"croppedImage": croppedFilePath,
                                      @"initialImage": initialFilePath,
                                      @"rectangleCoordinates": rectangleCoordinates });
@@ -85,7 +89,6 @@
           [self stop];
         }
     }];
-
 }
 
 
