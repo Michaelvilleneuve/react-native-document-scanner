@@ -9,6 +9,7 @@
 @property (assign, nonatomic) NSInteger stableCounter;
 @property (nonatomic, assign) float quality;
 @property (nonatomic, assign) BOOL useBase64;
+@property (nonatomic, assign) BOOL saveOnDisk;
 @property (nonatomic, assign) BOOL captureMultiple;
 @property (nonatomic, assign) BOOL saveInAppDocument;
 @property (copy, nonatomic, getter=getLastCapture, setter=setLastCapture:) NSDate * lastCapture;
