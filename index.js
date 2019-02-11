@@ -26,6 +26,10 @@ class PdfScanner extends React.Component {
     NativeModules.RNPdfScannerManager.capture();
   }
 
+  componentWillUnmount() {
+    NativeModules.RNPdfScannerManager.stopCamera()
+  }
+
   render() {
     return (
       <RNPdfScanner

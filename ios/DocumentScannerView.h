@@ -15,5 +15,6 @@
 @property (nonatomic, assign) NSInteger timeBetweenCaptures;
 
 - (void) capture;
+- (void) stopCamera;
 
 @end
