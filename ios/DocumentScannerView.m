@@ -66,19 +66,33 @@
                                     @"croppedImage": [croppedImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength],
                                     @"initialImage": [initialImageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength],
                                     @"rectangleCoordinates": rectangleCoordinates });
-            }
-            else {
-                NSString *dir = NSTemporaryDirectory();
-                if (self.saveInAppDocument) {
-                    dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-                }
-               NSString *croppedFilePath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"cropped_img_%i.jpeg",(int)[NSDate date].timeIntervalSince1970]];
-               NSString *initialFilePath = [dir stringByAppendingPathComponent:[NSString stringWithFormat:@"initial_img_%i.jpeg",(int)[NSDate date].timeIntervalSince1970]];
+            } else if(self.saveOnDisk){
+               NSError *error;
+               NSFileManager *fileMgr = [NSFileManager defaultManager];
+               NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+               NSString *dataPath = [documents stringByAppendingPathComponent:@"PJBANK_DOCUMENTS"];
+
+               if (![fileMgr fileExistsAtPath:dataPath])
+                   [[NSFileManager defaultManager] createDirectoryAtPath:dataPath withIntermediateDirectories:NO attributes:nil error:&error]; //Create folder
+
+               NSString *croppedFilePath = [dataPath stringByAppendingPathComponent:[NSString stringWithFormat:@"cropped_img_%i.jpeg",(int)[NSDate date].timeIntervalSince1970]];
+               NSString *initialFilePath = [dataPath stringByAppendingPathComponent:[NSString stringWithFormat:@"initial_img_%i.jpeg",(int)[NSDate date].timeIntervalSince1970]];
+
+               [[NSFileManager defaultManager] createFileAtPath:croppedFilePath contents:croppedImageData attributes:nil];
+               [[NSFileManager defaultManager] createFileAtPath:initialFilePath contents:initialImageData attributes:nil];
+               [self setLastCapture:[NSDate dateWithTimeIntervalSinceNow:self.timeBetweenCaptures]];
+               self.onPictureTaken(@{
+                                     @"croppedImage": croppedFilePath,
+                                     @"initialImage": initialFilePath,
+                                     @"rectangleCoordinates": rectangleCoordinates });
+            } else {
+               NSString *croppedFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"cropped_img_%i.jpeg",(int)[NSDate date].timeIntervalSince1970]];
+               NSString *initialFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"initial_img_%i.jpeg",(int)[NSDate date].timeIntervalSince1970]];
 
               [croppedImageData writeToFile:croppedFilePath atomically:YES];
               [initialImageData writeToFile:initialFilePath atomically:YES];
               [self setLastCapture:[NSDate dateWithTimeIntervalSinceNow:self.timeBetweenCaptures]];
-               self.onPictureTaken(@{
+              self.onPictureTaken(@{
                                      @"croppedImage": croppedFilePath,
                                      @"initialImage": initialFilePath,
                                      @"rectangleCoordinates": rectangleCoordinates });
@@ -89,7 +103,6 @@
           [self stop];
         }
     }];
-
 }
 
 
