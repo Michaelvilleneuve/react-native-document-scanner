@@ -39,6 +39,7 @@ class PdfScanner extends React.Component {
         quality={this.getImageQuality()}
         detectionCountBeforeCapture={this.props.detectionCountBeforeCapture||5}
         detectionRefreshRateInMS={this.props.detectionRefreshRateInMS||50}
+        timeBetweenCaptures={this.props.timeBetweenCaptures||5}
       />
     );
   }
