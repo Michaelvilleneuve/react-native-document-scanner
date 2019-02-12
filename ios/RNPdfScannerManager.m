@@ -38,6 +38,10 @@ RCT_EXPORT_METHOD(capture) {
     [_scannerView capture];
 }
 
+RCT_EXPORT_METHOD(stopCamera) {
+    [_scannerView stopCamera];
+}
+
 - (UIView*) view {
     _scannerView = [[DocumentScannerView alloc] init];
     return _scannerView;
