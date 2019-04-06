@@ -12,22 +12,10 @@ buildscript {
     }
 }
 
-// allprojects {
-//     repositories {
-//         mavenLocal()
-//         jcenter()
-//         maven {
-//             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-//             url "$rootDir/../node_modules/react-native/android"
-//         }
-//     }
-// }
-
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 26
 
     defaultConfig {
         minSdkVersion 16
@@ -38,20 +26,15 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
-    // lintOptions {
-    //     abortOnError false
-    //     warning 'InvalidPackage'
-    // }
 }
 
 dependencies {
-    //compile project(':openCVLibrary310').projectDir = new File(rootProject.projectDir,'../node_modules/react-native-documentscanner-android/android')
-    compile project(':openCVLibrary310')
-    compile "com.android.support:appcompat-v7:23.0.1"
-    compile "com.facebook.react:react-native:0.19.+"
-    compile 'com.google.zxing:core:3.0.1'
-    compile 'com.android.support:design:23.4.0'
-    compile 'org.piwik.sdk:piwik-sdk:0.0.4'
-    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-    compile 'us.feras.mdv:markdownview:1.1.0'
+    implementation project(':openCVLibrary310')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.facebook.react:react-native:0.19.+'
+    implementation 'com.google.zxing:core:3.0.1'
+//    implementation 'com.android.support:design:26.1.0'
+    implementation 'org.piwik.sdk:piwik-sdk:0.0.4'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'us.feras.mdv:markdownview:1.1.0'
 }
