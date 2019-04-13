@@ -31,13 +31,26 @@ return Arrays.<ReactPackage>asList(
 #### IMPORTANT - Go to folder app/settings.gradle and add
 
 ```java
-include ':react-native-documentscanner-android'
-project(':react-native-documentscanner-android').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-documentscanner-android/android')
+include ':react-native-document-scanner'
+project(':react-native-document-scanner').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-document-scanner/android')
 ```
  #### Add this (don't forget)
 ```java
 include ':openCVLibrary310'
-project(':openCVLibrary310').projectDir = new File(rootProject.projectDir,'../node_modules/react-native-documentscanner-android/android/openCVLibrary310')
+project(':openCVLibrary310').projectDir = new File(rootProject.projectDir,'../node_modules/react-native-document-scanner/android/openCVLibrary310')
+```
+#### In android/app/src/main/AndroidManifest.xml
+Change manifest header to avoid "Manifest merger error". After you add `xmlns:tools="http://schemas.android.com/tools"` should look like this:
+```
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.<yourAppName>" xmlns:tools="http://schemas.android.com/tools">
+```
+Add `tools:replace="android:allowBackup"` in <application tag. It should look like this:
+```
+<application tools:replace="android:allowBackup" android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:allowBackup="false" android:theme="@style/AppTheme">
+```
+Add Camera permissions request:
+```
+<uses-permission android:name="android.permission.CAMERA" />
 ```
 
 ### Manual capture
