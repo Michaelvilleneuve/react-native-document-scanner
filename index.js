@@ -1,10 +1,16 @@
 import React from 'react';
-import { requireNativeComponent, NativeModules } from 'react-native';
+import { requireNativeComponent, NativeModules, View, Platform, DeviceEventEmitter } from 'react-native';
 import PropTypes from 'prop-types';
 
 const RNPdfScanner = requireNativeComponent('RNPdfScanner', PdfScanner);
+const CameraManager = NativeModules.RNPdfScannerManager || {};
 
 class PdfScanner extends React.Component {
+
+  static defaultProps = {
+    onPictureTaken: ()=>{},
+    onProcessing: ()=>{},
+  }
 
   sendOnPictureTakenEvent(event) {
     return this.props.onPictureTaken(event.nativeEvent);
@@ -22,8 +28,25 @@ class PdfScanner extends React.Component {
     return this.props.quality;
   }
 
+  componentWillMount(){
+    if (Platform.OS === 'android') {
+      const { onPictureTaken, onProcessing } = this.props;
+      DeviceEventEmitter.addListener('onPictureTaken', onPictureTaken);
+      DeviceEventEmitter.addListener('onProcessingChange', onProcessing);
+    }
+  }
+  
+  componentWillUnmount(){
+    if (Platform.OS === 'android') {
+      const { onPictureTaken, onProcessing } = this.props;
+      DeviceEventEmitter.removeListener('onPictureTaken', onPictureTaken);
+      DeviceEventEmitter.removeListener('onProcessingChange', onProcessing);
+    }
+  }
+
   capture() {
-    NativeModules.RNPdfScannerManager.capture();
+    // NativeModules.RNPdfScannerManager.capture();
+    CameraManager.capture();
   }
 
   render() {
@@ -56,6 +79,11 @@ PdfScanner.propTypes = {
   detectionCountBeforeCapture: PropTypes.number,
   detectionRefreshRateInMS: PropTypes.number,
   quality: PropTypes.number,
+
+  documentAnimation : PropTypes.bool,
+  noGrayScale: PropTypes.bool,
+  manualOnly: PropTypes.bool,
+    ...View.propTypes // include the default view properties
 };
 
 export default PdfScanner;
