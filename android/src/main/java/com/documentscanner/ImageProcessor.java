@@ -186,9 +186,7 @@ public class ImageProcessor extends Handler {
 
         mMainActivity.getHUD().clear();
         mMainActivity.invalidateHUD();
-        mMainActivity.saveDocument(
-            doc
-        );
+        mMainActivity.saveDocument(doc);
         doc.release();
         picture.release();
 
@@ -215,8 +213,7 @@ public class ImageProcessor extends Handler {
 
             sd.originalPoints = new Point[4];
 
-
-            sd.originalPoints[0] = new Point(sd.widthWithRatio - quad.points[3].y,quad.points[3].x); // Topleft
+            sd.originalPoints[0] = new Point(sd.widthWithRatio - quad.points[3].y, quad.points[3].x); // Topleft
             sd.originalPoints[1] = new Point(sd.widthWithRatio - quad.points[0].y, quad.points[0].x); // TopRight
             sd.originalPoints[2] = new Point(sd.widthWithRatio - quad.points[1].y, quad.points[1].x); // BottomRight
             sd.originalPoints[3] = new Point(sd.widthWithRatio - quad.points[2].y, quad.points[2].x); // BottomLeft
@@ -309,10 +306,10 @@ public class ImageProcessor extends Handler {
         PathShape newBox = new PathShape(path, previewWidth, previewHeight);
 
         Paint paint = new Paint();
-        paint.setColor(Color.argb(180, 66, 165, 245));
+        paint.setColor(mMainActivity.parsedOverlayColor());
 
         Paint border = new Paint();
-        border.setColor(Color.rgb(66, 165, 245));
+        border.setColor(mMainActivity.parsedOverlayColor());
         border.setStrokeWidth(5);
 
         hud.clear();
@@ -391,30 +388,22 @@ public class ImageProcessor extends Handler {
 
         int width = Double.valueOf(size.width).intValue();
         int height = Double.valueOf(size.height).intValue();
-        
+
         int minimumSize = width / 10;
 
         boolean isANormalShape = rp[0].x != rp[1].x && rp[1].y != rp[0].y && rp[2].y != rp[3].y && rp[3].x != rp[2].x;
-        boolean isBigEnough = (
-            (rp[1].x - rp[0].x >= minimumSize) && 
-            (rp[2].x - rp[3].x >= minimumSize) && 
-            (rp[3].y - rp[0].y >= minimumSize) &&
-            (rp[2].y - rp[1].y >= minimumSize)
-        );
-        
+        boolean isBigEnough = ((rp[1].x - rp[0].x >= minimumSize) && (rp[2].x - rp[3].x >= minimumSize)
+                && (rp[3].y - rp[0].y >= minimumSize) && (rp[2].y - rp[1].y >= minimumSize));
+
         double leftOffset = rp[0].x - rp[3].x;
         double rightOffset = rp[1].x - rp[2].x;
         double bottomOffset = rp[0].y - rp[1].y;
         double topOffset = rp[2].y - rp[3].y;
 
-        boolean isAnActualRectangle = (
-            (leftOffset <= minimumSize && leftOffset >= -minimumSize) && 
-            (rightOffset <= minimumSize && rightOffset >= -minimumSize) && 
-            (bottomOffset <= minimumSize && bottomOffset >= -minimumSize) &&
-            (topOffset <= minimumSize && topOffset >= -minimumSize)
-        );
-        
-
+        boolean isAnActualRectangle = ((leftOffset <= minimumSize && leftOffset >= -minimumSize)
+                && (rightOffset <= minimumSize && rightOffset >= -minimumSize)
+                && (bottomOffset <= minimumSize && bottomOffset >= -minimumSize)
+                && (topOffset <= minimumSize && topOffset >= -minimumSize));
 
         return isANormalShape && isAnActualRectangle && isBigEnough;
     }

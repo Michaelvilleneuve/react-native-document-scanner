@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
  * Created by Andre on 29/11/2017.
  */
 
-public class DocumentScannerViewManager extends ViewGroupManager<MainView>{
+public class DocumentScannerViewManager extends ViewGroupManager<MainView> {
 
     public static final String REACT_CLASS = "RNPdfScanner";
     private MainView view = null;
@@ -29,8 +29,9 @@ public class DocumentScannerViewManager extends ViewGroupManager<MainView>{
 
     @Override
     protected MainView createViewInstance(final ThemedReactContext reactContext) {
-       //OpenNoteCameraView view = new OpenNoteCameraView(reactContext, -1, reactContext.getCurrentActivity());
-        MainView.createInstance(reactContext,(Activity) reactContext.getBaseContext());
+        // OpenNoteCameraView view = new OpenNoteCameraView(reactContext, -1,
+        // reactContext.getCurrentActivity());
+        MainView.createInstance(reactContext, (Activity) reactContext.getBaseContext());
 
         view = MainView.getInstance();
         view.setOnProcessingListener(new OpenNoteCameraView.OnProcessingListener() {
@@ -43,10 +44,10 @@ public class DocumentScannerViewManager extends ViewGroupManager<MainView>{
         view.setOnScannerListener(new OpenNoteCameraView.OnScannerListener() {
             @Override
             public void onPictureTaken(WritableMap data) {
-                dispatchEvent(reactContext,"onPictureTaken", data);
+                dispatchEvent(reactContext, "onPictureTaken", data);
             }
         });
-        
+
         return view;
     }
 
@@ -55,42 +56,42 @@ public class DocumentScannerViewManager extends ViewGroupManager<MainView>{
     }
 
     @ReactProp(name = "documentAnimation", defaultBoolean = false)
-    public void setDocumentAnimation(MainView view, boolean animate){
+    public void setDocumentAnimation(MainView view, boolean animate) {
         view.setDocumentAnimation(animate);
     }
 
-    @ReactProp(name="overlayColor")
-    public void setOverlayColor(MainView view, String rgbaColor){
-
+    @ReactProp(name = "overlayColor")
+    public void setOverlayColor(MainView view, String rgbaColor) {
+        view.setOverlayColor(rgbaColor);
     }
 
     @ReactProp(name = "detectionCountBeforeCapture", defaultInt = 15)
-    public void setDetectionCountBeforeCapture(MainView view, int numberOfRectangles){
+    public void setDetectionCountBeforeCapture(MainView view, int numberOfRectangles) {
         view.setDetectionCountBeforeCapture(numberOfRectangles);
     }
 
     @ReactProp(name = "enableTorch", defaultBoolean = false)
-    public void setEnableTorch(MainView view, Boolean enable){
+    public void setEnableTorch(MainView view, Boolean enable) {
         view.setEnableTorch(enable);
     }
 
-    @ReactProp(name="manualOnly", defaultBoolean = false)
-    public void setManualOnly(MainView view, Boolean manualOnly){
+    @ReactProp(name = "manualOnly", defaultBoolean = false)
+    public void setManualOnly(MainView view, Boolean manualOnly) {
         view.setManualOnly(manualOnly);
     }
 
-    @ReactProp(name="brightness", defaultDouble = 10)
-    public void setBrightness(MainView view, double brightness){
+    @ReactProp(name = "brightness", defaultDouble = 10)
+    public void setBrightness(MainView view, double brightness) {
         view.setBrightness(brightness);
     }
 
-    @ReactProp(name="contrast", defaultDouble = 1)
-    public void setContrast(MainView view, double contrast){
+    @ReactProp(name = "contrast", defaultDouble = 1)
+    public void setContrast(MainView view, double contrast) {
         view.setContrast(contrast);
     }
 
-    @ReactProp(name="noGrayScale", defaultBoolean = false)
-    public void setRemoveGrayScale(MainView view, boolean bw){
+    @ReactProp(name = "noGrayScale", defaultBoolean = false)
+    public void setRemoveGrayScale(MainView view, boolean bw) {
         view.setRemoveGrayScale(bw);
     }
 
