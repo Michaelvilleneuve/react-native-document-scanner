@@ -121,7 +121,7 @@ class YourComponent extends Component {
 | Prop                        | Platform | Default |   Type    | Description                                                       |
 | :-------------------------- | :------: | :-----: | :-------: | :---------------------------------------------------------------- |
 | overlayColor                |   Both   | `none`  | `string`  | Color of the detected rectangle : rgba recommended                |
-| detectionCountBeforeCapture |   iOS    |   `5`   | `integer` | Number of correct rectangle to detect before capture              |
+| detectionCountBeforeCapture |   Both   |   `5`   | `integer` | Number of correct rectangle to detect before capture              |
 | detectionRefreshRateInMS    |   iOS    |  `50`   | `integer` | Time between two rectangle detection attempt                      |
 | enableTorch                 |   Both   | `false` |  `bool`   | Allows to active or deactivate flash during document detection    |
 | useFrontCam                 |   iOS    | `false` |  `bool`   | Allows you to switch between front and back camera                |
