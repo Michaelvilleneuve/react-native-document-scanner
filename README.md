@@ -36,16 +36,9 @@ If you want to use Cocoapods insteads of `react-native link`, add the following 
   pod 'RNPdfScanner', :path => '../node_modules/react-native-document-scanner/ios'
 ```
 
-### Android
+### Android Only
 
-#### IMPORTANT - Go to folder app/settings.gradle and add
-
-```java
-include ':react-native-document-scanner'
-project(':react-native-document-scanner').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-document-scanner/android')
-```
-
-#### Link Open CV Library
+If you do not have it already in your project, you must link openCV in your `settings.gradle` file
 
 ```java
 include ':openCVLibrary310'
