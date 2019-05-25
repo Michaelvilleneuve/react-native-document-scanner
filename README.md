@@ -2,6 +2,8 @@
 
 # React Native Document Scanner (iOS only)
 
+**Check out the android branch if you need both platforms, should be released soon** 
+
 Live document detection library. Returns either a URI or a base64 encoded string of the captured image, allowing you to easily store it or use it as you wish !
 
 Features :
