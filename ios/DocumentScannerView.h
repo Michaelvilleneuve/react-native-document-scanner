@@ -11,7 +11,10 @@
 @property (nonatomic, assign) BOOL useBase64;
 @property (nonatomic, assign) BOOL captureMultiple;
 @property (nonatomic, assign) BOOL saveInAppDocument;
+@property (copy, nonatomic, getter=getLastCapture, setter=setLastCapture:) NSDate * lastCapture;
+@property (nonatomic, assign) NSInteger timeBetweenCaptures;
 
 - (void) capture;
+- (void) stopCamera;
 
 @end

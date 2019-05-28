@@ -92,6 +92,7 @@ class YourComponent extends Component {
 | useBase64 | `false` | `bool` | If base64 representation should be passed instead of image uri's |
 | saveInAppDocument | `false` | `bool` | If should save in app document in case of not using base 64 |
 | captureMultiple | `false` | `bool` | Keeps the scanner on after a successful capture |
+| timeBetweenCaptures | `5` | `integer` | Time in seconds the camera will not capture after a successful capture (this don't affect manual capture) |
 
 ## Manual capture
 

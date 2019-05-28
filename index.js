@@ -26,6 +26,10 @@ class PdfScanner extends React.Component {
     NativeModules.RNPdfScannerManager.capture();
   }
 
+  componentWillUnmount() {
+    NativeModules.RNPdfScannerManager.stopCamera()
+  }
+
   render() {
     return (
       <RNPdfScanner
@@ -39,6 +43,7 @@ class PdfScanner extends React.Component {
         quality={this.getImageQuality()}
         detectionCountBeforeCapture={this.props.detectionCountBeforeCapture||5}
         detectionRefreshRateInMS={this.props.detectionRefreshRateInMS||50}
+        timeBetweenCaptures={this.props.timeBetweenCaptures||5}
       />
     );
   }
@@ -56,6 +61,7 @@ PdfScanner.propTypes = {
   detectionCountBeforeCapture: PropTypes.number,
   detectionRefreshRateInMS: PropTypes.number,
   quality: PropTypes.number,
+  timeBetweenCaptures: PropTypes.number,
 };
 
 export default PdfScanner;
