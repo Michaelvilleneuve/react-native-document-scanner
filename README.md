@@ -2,7 +2,9 @@
 
 # React Native Document Scanner
 
-Live document detection library. Returns either a URI or a base64 (iOS only for now) encoded string of the captured image, allowing you to easily store it or use it as you wish !
+
+Live document detection library. Returns either a URI or a base64 encoded string of the captured image, allowing you to easily store it or use it as you wish !
+
 
 Features :
 
