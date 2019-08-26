@@ -1,16 +1,59 @@
-import React from 'react';
-import { requireNativeComponent, NativeModules, View, Platform, DeviceEventEmitter } from 'react-native';
-import PropTypes from 'prop-types';
+import React from "react";
+import {
+  requireNativeComponent,
+  NativeModules,
+  View,
+  Platform,
+  PermissionsAndroid,
+  DeviceEventEmitter,
+  Text
+} from "react-native";
+import PropTypes from "prop-types";
 
-const RNPdfScanner = requireNativeComponent('RNPdfScanner', PdfScanner);
+const RNPdfScanner = requireNativeComponent("RNPdfScanner", PdfScanner);
 const CameraManager = NativeModules.RNPdfScannerManager || {};
 
 class PdfScanner extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      permissionsAuthorized: Platform.OS === "ios"
+    };
+  }
+
+  onPermissionsDenied = () => {
+    if (this.props.onPermissionsDenied) this.props.onPermissionsDenied();
+  };
+
+  componentDidMount() {
+    this.getAndroidPermissions();
+  }
+
+  async getAndroidPermissions() {
+    if (Platform.OS !== "android") return;
+    try {
+      const granted = await PermissionsAndroid.requestMultiple([
+        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE
+      ]);
+
+      if (
+        granted["android.permission.READ_EXTERNAL_STORAGE"] ===
+          PermissionsAndroid.RESULTS.GRANTED &&
+        granted["android.permission.WRITE_EXTERNAL_STORAGE"] ===
+          PermissionsAndroid.RESULTS.GRANTED
+      )
+        this.setState({ permissionsAuthorized: true });
+      else this.onPermissionsDenied();
+    } catch (err) {
+      this.onPermissionsDenied();
+    }
+  }
 
   static defaultProps = {
-    onPictureTaken: ()=>{},
-    onProcessing: ()=>{},
-  }
+    onPictureTaken: () => {},
+    onProcessing: () => {}
+  };
 
   sendOnPictureTakenEvent(event) {
     return this.props.onPictureTaken(event.nativeEvent);
@@ -28,40 +71,43 @@ class PdfScanner extends React.Component {
     return this.props.quality;
   }
 
-  componentWillMount(){
-    if (Platform.OS === 'android') {
+  componentWillMount() {
+    if (Platform.OS === "android") {
       const { onPictureTaken, onProcessing } = this.props;
-      DeviceEventEmitter.addListener('onPictureTaken', onPictureTaken);
-      DeviceEventEmitter.addListener('onProcessingChange', onProcessing);
+      DeviceEventEmitter.addListener("onPictureTaken", onPictureTaken);
+      DeviceEventEmitter.addListener("onProcessingChange", onProcessing);
     }
   }
-  
-  componentWillUnmount(){
-    if (Platform.OS === 'android') {
+
+  componentWillUnmount() {
+    if (Platform.OS === "android") {
       const { onPictureTaken, onProcessing } = this.props;
-      DeviceEventEmitter.removeListener('onPictureTaken', onPictureTaken);
-      DeviceEventEmitter.removeListener('onProcessingChange', onProcessing);
+      DeviceEventEmitter.removeListener("onPictureTaken", onPictureTaken);
+      DeviceEventEmitter.removeListener("onProcessingChange", onProcessing);
     }
   }
 
   capture() {
     // NativeModules.RNPdfScannerManager.capture();
-    CameraManager.capture();
+    if (this.state.permissionsAuthorized) CameraManager.capture();
   }
 
   render() {
+    if (!this.state.permissionsAuthorized) return null;
     return (
       <RNPdfScanner
         {...this.props}
         onPictureTaken={this.sendOnPictureTakenEvent.bind(this)}
         onRectangleDetect={this.sendOnRectanleDetectEvent.bind(this)}
-        useFrontCam={this.props.useFrontCam||false}
-        brightness={this.props.brightness||0}
-        saturation={this.props.saturation||1}
-        contrast={this.props.contrast||1}
+        useFrontCam={this.props.useFrontCam || false}
+        brightness={this.props.brightness || 0}
+        saturation={this.props.saturation || 1}
+        contrast={this.props.contrast || 1}
         quality={this.getImageQuality()}
-        detectionCountBeforeCapture={this.props.detectionCountBeforeCapture||5}
-        detectionRefreshRateInMS={this.props.detectionRefreshRateInMS||50}
+        detectionCountBeforeCapture={
+          this.props.detectionCountBeforeCapture || 5
+        }
+        detectionRefreshRateInMS={this.props.detectionRefreshRateInMS || 50}
       />
     );
   }
@@ -79,11 +125,10 @@ PdfScanner.propTypes = {
   detectionCountBeforeCapture: PropTypes.number,
   detectionRefreshRateInMS: PropTypes.number,
   quality: PropTypes.number,
-
-  documentAnimation : PropTypes.bool,
+  documentAnimation: PropTypes.bool,
   noGrayScale: PropTypes.bool,
   manualOnly: PropTypes.bool,
-    ...View.propTypes // include the default view properties
+  ...View.propTypes // include the default view properties
 };
 
 export default PdfScanner;

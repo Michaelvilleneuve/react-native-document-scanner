@@ -2,9 +2,7 @@
 
 # React Native Document Scanner
 
-
 Live document detection library. Returns either a URI or a base64 encoded string of the captured image, allowing you to easily store it or use it as you wish !
-
 
 Features :
 
@@ -100,6 +98,7 @@ class YourComponent extends Component {
           }
           detectionCountBeforeCapture={5}
           detectionRefreshRateInMS={50}
+          onPermissionsDenied={() => console.log("Permissions Denied")}
         />
         <Image
           source={{ uri: `data:image/jpeg;base64,${this.state.image}` }}
@@ -127,6 +126,7 @@ class YourComponent extends Component {
 | useBase64                   |   iOS    | `false` |  `bool`   | If base64 representation should be passed instead of image uri's  |
 | saveInAppDocument           |   iOS    | `false` |  `bool`   | If should save in app document in case of not using base 64       |
 | captureMultiple             |   iOS    | `false` |  `bool`   | Keeps the scanner on after a successful capture                   |
+| onPermissionsDenied         | android  | `null`  |  `func`   | Function to call when the Android permissions are denied          |
 
 ## Manual capture
 
